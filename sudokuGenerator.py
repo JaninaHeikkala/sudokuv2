@@ -1,10 +1,80 @@
-def generateBoard():
+from random import randint
+
+
+def generateBoard(diff):
+
     board = ['x']*9
     i = 0
     while (i < 9):
         board[i] = ['x']*9
         i += 1
+
+    inRow = 0
+
+    for y in range(0,9):
+        for x in range(0,9):
+            do = randint(0,1)
+            if (do == 1):
+                inRow += 1
+                print(inRow)
+                if (inRow <= diff):
+                    for num in range(1,10):
+                        works = checkIfWorks(board, num, x, y)
+                        if (works):
+                            board[y][x] = num
+                            break
+        inRow = 0
+
     return board
+
+def checkIfWorks(board, num, x, y):
+
+    #row
+    if (num in board[y]):
+        return False
+
+    #column
+    for i in range(0,9):
+        if (num == board[i][x]):
+            return False
+
+    #boxes
+
+    #top row
+    if ((x % 3 == 0 or x == 0) and (y % 3 == 0 or y == 0)):
+        if (board[y+1][x+1] == num or board[y+1][x+2] == num or board[y+2][x+1] == num or board[y+2][x+2] == num):
+            return False
+    elif ((x == 1 or x == 4 or x == 7) and (y % 3 == 0 or y == 0)):
+        if (board[y+1][x-1] == num or board[y+1][x+1] == num or board[y+2][x-1] == num or board[y+2][x+1] == num):
+            return False
+    elif ((x == 2 or x == 5 or x == 8) and (y % 3 == 0 or y == 0)):
+        if (board[y+1][x-2] == num or board[y+1][x-1] == num or board[y+2][x-2] == num or board[y+2][x-1] == num):
+            return False
+
+    #middle row
+    elif ((x % 3 == 0 or x == 0) and (y == 1 or y == 4 or y == 7)):
+        if (board[y-1][x+1] == num or board[y-1][x+2] == num or board[y+1][x+1] == num or board[y+1][x+2] == num):
+            return False
+    elif ((x == 1 or x == 4 or x == 7) and (y == 1 or y == 4 or y == 7)):
+        if (board[y-1][x-1] == num or board[y-1][x+1] == num or board[y+1][x-1] == num or board[y+1][x+1] == num):
+            return False
+    elif ((x == 2 or x == 5 or x == 8) and (y == 1 or y == 4 or y == 7)):
+        if (board[y-1][x-2] == num or board[y-1][x-1] == num or board[y+1][x-2] == num or board[y+1][x-1] == num):
+            return False
+
+    #bottom row
+    elif ((x % 3 == 0 or x == 0) and (y == 2 or y == 5 or y == 8)):
+        if (board[y-2][x+1] == num or board[y-2][x+2] == num or board[y-1][x+1] == num or board[y-1][x+2] == num):
+            return False
+    elif ((x == 1 or x == 4 or x == 7) and (y == 2 or y == 5 or y == 8)):
+        if (board[y-2][x-1] == num or board[y-2][x+1] == num or board[y-1][x-1] == num or board[y-1][x+1] == num):
+            return False
+    elif ((x == 2 or x == 5 or x == 8) and (y == 2 or y == 5 or y == 8)):
+        if (board[y-2][x-2] == num or board[y-2][x-1] == num or board[y-1][x-2] == num or board[y-1][x-1] == num):
+            return False
+
+    #else
+    return True
 
 def printBoard(board):
     for j in range(0, 9):
@@ -21,6 +91,6 @@ def printBoard(board):
         print()
 
 def main():
-    board = generateBoard()
+    board = generateBoard(5)
     printBoard(board)
 main()
