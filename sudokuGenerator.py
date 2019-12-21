@@ -16,13 +16,18 @@ def generateBoard(diff):
             do = randint(0,1)
             if (do == 1):
                 inRow += 1
-                print(inRow)
                 if (inRow <= diff):
-                    for num in range(1,10):
-                        works = checkIfWorks(board, num, x, y)
-                        if (works):
-                            board[y][x] = num
-                            break
+                    tried = []
+                    while (len(tried) <= 9):
+                        num = randint(1,9)
+                        if num not in tried:
+                            works = checkIfWorks(board, num, x, y)
+                            if (works):
+                                board[y][x] = num
+                                break
+                            else:
+                                tried.append(num)
+                        print(tried)
         inRow = 0
 
     return board
@@ -91,6 +96,6 @@ def printBoard(board):
         print()
 
 def main():
-    board = generateBoard(5)
+    board = generateBoard(9)
     printBoard(board)
 main()
