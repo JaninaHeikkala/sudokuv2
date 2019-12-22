@@ -18,7 +18,9 @@ def generateBoard(diff):
                 inRow += 1
                 if (inRow <= diff):
                     tried = []
+                    tries = 0
                     while (len(tried) <= 9):
+                        tries += 1
                         num = randint(1,9)
                         if num not in tried:
                             works = checkIfWorks(board, num, x, y)
@@ -27,7 +29,8 @@ def generateBoard(diff):
                                 break
                             else:
                                 tried.append(num)
-                        print(tried)
+                        if (tries >= 100):
+                            return False
         inRow = 0
 
     return board
@@ -81,6 +84,32 @@ def checkIfWorks(board, num, x, y):
     #else
     return True
 
+def findEmpty(board):
+    for y in range(0,9):
+        for x in range(0,9):
+            if (board[y][x] == 'x'):
+                return [x, y]
+    return False
+
+
+def solveable(board):
+    pos = findEmpty(board)
+    if not pos:
+        return True
+    x = pos[0]
+    y = pos[1]
+    for num in range(1,10):
+        if checkIfWorks(board, num, x, y):
+            board[y][x] = num
+            solv = solveable(board)
+            if solv:
+                return True
+            board[y][x] = 'x'
+    return False
+
+
+
+
 def printBoard(board):
     for j in range(0, 9):
         if j % 3 == 0 and j != 0:
@@ -96,6 +125,23 @@ def printBoard(board):
         print()
 
 def main():
-    board = generateBoard(9)
+    diff = 5
+    board = generateBoard(diff)
+    while (board == False):
+        board = generateBoard(diff)
+    print("Board generated:")
+    printBoard(board)
+    print("solving...")
+    solved = solveable(board)
+    while not solved:
+        print("Could not solve")
+        board = generateBoard(diff)
+        while (board == False):
+            board = generateBoard(diff)
+        print("\nBoard generated:")
+        printBoard(board)
+        print("solving...")
+        solved = solveable(board)
+    print("\nBoard solved:")
     printBoard(board)
 main()
