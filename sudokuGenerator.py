@@ -124,7 +124,7 @@ def printBoard(board):
             print(" {} ".format(board[j][i]), end='')
         print()
 
-def main():
+def generator():
     diff = 9
     board = generateBoard(diff)
     while (board == False):
@@ -144,4 +144,4 @@ def main():
         solved = solveable(board)
     print("\nBoard solved:")
     printBoard(board)
-main()
+    return board
