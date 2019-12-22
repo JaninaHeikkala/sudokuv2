@@ -125,7 +125,7 @@ def printBoard(board):
         print()
 
 def main():
-    diff = 5
+    diff = 9
     board = generateBoard(diff)
     while (board == False):
         board = generateBoard(diff)
