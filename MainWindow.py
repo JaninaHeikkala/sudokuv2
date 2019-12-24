@@ -1,6 +1,4 @@
-import os, sys
 import pygame as pg
-from pygame.locals import *
 
 white = (255, 255, 255)
 black = (0, 0, 0)
@@ -10,6 +8,26 @@ def drawButton(screen, text, y):
     pg.draw.rect(screen, grey, (45, y, 250, 40), 0)
     screen.blit(text, (55, y+10))
 
+def pressedButton(pos):
+    x = pos[0]
+    y = pos[1]
+    if (x >= 45 and x <= 295):
+        if (y >= 100 and y <= 140):
+            return 1
+        elif (y >= 160 and y <= 200):
+            return 2
+        elif (y>= 220 and y <= 260):
+            return 3
+    return False
+
+def checkDifficulty(pressed):
+    if (pressed == 1):
+        diff = 9
+    elif (pressed == 2):
+        diff = 8
+    elif (pressed == 3):
+        diff = 7
+    return diff
 
 def mainWindow():
 
@@ -19,8 +37,14 @@ def mainWindow():
     run = True
     while run:
         for event in pg.event.get():
+            pos = pg.mouse.get_pos()
             if event.type == pg.QUIT:
                 run = False
+            if event.type == pg.MOUSEBUTTONDOWN:
+                pressed = pressedButton(pos)
+                if (pressed != False):
+                    diff = checkDifficulty(pressed)
+                    run = False
 
         screen.fill(white)
 
@@ -34,3 +58,5 @@ def mainWindow():
         drawButton(screen, font2.render("hard", True, black), 220)
 
         pg.display.flip()
+
+    return diff
