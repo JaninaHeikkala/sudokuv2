@@ -6,7 +6,7 @@ white = (255, 255, 255)
 black = (0, 0, 0)
 grey = (180, 180, 180)
 lightgrey = (230, 230, 230)
-darkgrey = (60, 60, 60)
+darkgrey = (100, 100, 100)
 red = (255, 0, 0)
 
 def drawLines(screen):
@@ -17,11 +17,44 @@ def drawLines(screen):
             pg.draw.line(screen, black, (i, 0), (i, 450), 3)
             pg.draw.line(screen, black, (0, i), (450, i), 3)
 
-def drawNumbers(screen, board):
+def drawNumbers(screen, board, ownInput, smallNumbers):
     font = pg.font.SysFont("Arial", 40)
+    smallfont = pg.font.SysFont("Arial", 20)
     for y in range(0,9):
         for x in range(0,9):
-            if (board[y][x] != 'x'):
+            if (ownInput[y][x] != 'x'):
+                color = darkgrey
+                numText = font.render(str(ownInput[y][x]), True, color)
+                screen.blit(numText, (x * 50 + 17, y * 50 + 13))
+            elif (smallNumbers[y][x] != ['x']*9):
+                color = darkgrey
+                for i in range(0,9):
+                    if (smallNumbers[y][x][i] != 'x'):
+                        numText = smallfont.render(str(smallNumbers[y][x][i]), True, color)
+                        xp = x*50 + 6
+                        yp = y*50 + 6
+                        if i == 1:
+                            xp += 15
+                        elif i == 2:
+                            xp += 30
+                        elif i == 3:
+                            yp += 15
+                        elif i == 4:
+                            xp += 15
+                            yp += 15
+                        elif i == 5:
+                            xp += 30
+                            yp += 15
+                        elif i == 6:
+                            yp += 30
+                        elif i == 7:
+                            yp += 30
+                            xp += 15
+                        elif i == 8:
+                            yp += 30
+                            xp += 30
+                        screen.blit(numText, (xp, yp))
+            elif (board[y][x] != 'x'):
                 '''if (checkIfWorks(board, board[y][x], x, y)):
                     color = black
                 else:
@@ -29,6 +62,7 @@ def drawNumbers(screen, board):
                 color = black
                 numText = font.render(str(board[y][x]), True, color)
                 screen.blit(numText, (x*50+17, y*50+13))
+
 
 def checkPos(pos):
     xC = pos[0]
@@ -100,29 +134,53 @@ def getInput(event):
         num = '8'
     elif (event.key == pg.K_9):
         num = '9'
+    else:
+        num = False
     return num
 
-def drawBigNumbers(board, num, x, y):
+def drawBigNumbers(board, ownInput, smallNumbers, num, x, y):
     if (board[y][x] == 'x'):
+        ownInput[y][x] = num
         board[y][x] = num
+        smallNumbers[y][x] = ['x']*9
         #print("drawn")
 
-def removeNumber(board, x, y):
-    if (board[y][x] != 'x'):
+def removeNumber(board, ownInput, x, y):
+    if (board[y][x] != 'x' and ownInput[y][x] != 'x'):
         board[y][x] = 'x'
+        ownInput[y][x] = 'x'
 
-#def drawSmallNumbers():
+def drawSmallNumbers(smallNumbers, ownInput, board, num, x, y):
+    if ownInput[y][x] != 'x':
+        ownInput[y][x] = 'x'
+        board[y][x] = 'x'
+    if (smallNumbers[y][x][int(num)-1] != 'x'):
+        smallNumbers[y][x][int(num) - 1] = 'x'
+    else:
+        smallNumbers[y][x][int(num)-1] = num
 
 def checkIfCorrect(board, solution):
     for y in range(0,9):
         for x in range(0,9):
-            if (board[y][x] != solution[y][x]):
+            if (int(board[y][x]) != int(solution[y][x])):
+                #print(str(board[y][x]) + " " + str(solution[y][x]))
+                print("solution not correct")
                 return False
     return True
 
 def sudokuWindow(board, solution):
     pg.init()
     screen = pg.display.set_mode((450, 450))
+
+    ownInput = ['x']*9
+    for i in range(0, 9):
+        ownInput[i] = ['x']*9
+
+    smallNumbers = ['x']*9
+    for i in range(0,9):
+        smallNumbers[i] = ['x']*9
+        for j in range(0,9):
+            smallNumbers[i][j] = ['x']*9
 
     x = 66
     y = 66
@@ -143,7 +201,7 @@ def sudokuWindow(board, solution):
             if (event.type == pg.KEYDOWN):
                 if (x != 66 and y != 66):
                     if (event.key == pg.K_BACKSPACE):
-                        removeNumber(board, x, y)
+                        removeNumber(board, ownInput, x, y)
                     elif (event.key == pg.K_TAB):
                         if (bigNumbers):
                             bigNumbers = False
@@ -151,19 +209,21 @@ def sudokuWindow(board, solution):
                             bigNumbers = True
                     else:
                         num = getInput(event)
-                        #print(num)
-                        if bigNumbers:
-                            drawBigNumbers(board, num, x, y)
-                        #else:
-                            #drawSmallNumbers()
+                        if (num != False):
+                            #print(num)
+                            if bigNumbers:
+                                drawBigNumbers(board, ownInput, smallNumbers, num, x, y)
+                            else:
+                                drawSmallNumbers(smallNumbers, ownInput, board, num, x, y)
 
 
         drawLines(screen)
-        drawNumbers(screen, board)
+        drawNumbers(screen, board, ownInput, smallNumbers)
 
         if not findEmpty(board):
-            run = False
             win = checkIfCorrect(board, solution)
-            endgameWindow(win)
+            if win:
+                run = False
+                endgameWindow(win)
 
         pg.display.flip()
