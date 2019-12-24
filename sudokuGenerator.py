@@ -148,6 +148,7 @@ def generator(diff):
         board = generateBoard(diff)
     print("Board generated:")
     printBoard(board)
+    preSolved = cloneBoard(board)
     print("solving...")
     solved = solveable(board)
     while not solved:
