@@ -3,8 +3,8 @@ from MainWindow import mainWindow
 from sudokuWindow import sudokuWindow
 
 def main():
-    #diff = mainWindow()
+    diff = mainWindow()
     #print(diff)
-    sudokuWindow()
-    #board = generator()
+    preSolved, board = generator(diff)
+    sudokuWindow(preSolved)
 main()

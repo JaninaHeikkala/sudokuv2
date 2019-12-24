@@ -1,5 +1,6 @@
 from random import randint
 
+looped = 0
 
 def generateBoard(diff):
 
@@ -93,6 +94,10 @@ def findEmpty(board):
 
 
 def solveable(board):
+    global looped
+    looped += 1
+    if (looped >= 10000):
+        return False
     pos = findEmpty(board)
     if not pos:
         return True
@@ -124,10 +129,22 @@ def printBoard(board):
             print(" {} ".format(board[j][i]), end='')
         print()
 
-def generator():
-    diff = 9
+def cloneBoard(board):
+    preSolved = ['x']*9
+    for i in range(0,9):
+        preSolved[i] = ['x']*9
+
+    for y in range(0,9):
+        for x in range(0,9):
+            preSolved[y][x] = board[y][x]
+
+    return preSolved
+
+def generator(diff):
+    global looped
     board = generateBoard(diff)
     while (board == False):
+        looped = 0
         board = generateBoard(diff)
     print("Board generated:")
     printBoard(board)
@@ -137,11 +154,13 @@ def generator():
         print("Could not solve")
         board = generateBoard(diff)
         while (board == False):
+            looped = 0
             board = generateBoard(diff)
         print("\nBoard generated:")
         printBoard(board)
         print("solving...")
+        preSolved = cloneBoard(board)
         solved = solveable(board)
     print("\nBoard solved:")
     printBoard(board)
-    return board
+    return preSolved, board
