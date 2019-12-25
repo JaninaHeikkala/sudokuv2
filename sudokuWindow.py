@@ -1,6 +1,8 @@
 import pygame as pg
 from sudokuGenerator import checkIfWorks, findEmpty
 from endgameWindow import endgameWindow
+from tkinter import *
+from tkinter import messagebox
 
 white = (255, 255, 255)
 black = (0, 0, 0)
@@ -144,8 +146,12 @@ def drawBigNumbers(board, ownInput, smallNumbers, num, x, y):
         board[y][x] = num
         smallNumbers[y][x] = ['x']*9
         #print("drawn")
+    elif ownInput[y][x] == num:
+        board[y][x] = 'x'
+        ownInput[y][x] = 'x'
 
-def removeNumber(board, ownInput, x, y):
+def removeNumber(board, ownInput, smallNumbers, x, y):
+    smallNumbers[y][x] = ['x'] * 9
     if (board[y][x] != 'x' and ownInput[y][x] != 'x'):
         board[y][x] = 'x'
         ownInput[y][x] = 'x'
@@ -160,13 +166,16 @@ def drawSmallNumbers(smallNumbers, ownInput, board, num, x, y):
         smallNumbers[y][x][int(num)-1] = num
 
 def checkIfCorrect(board, solution):
+    errors = 0
     for y in range(0,9):
         for x in range(0,9):
             if (int(board[y][x]) != int(solution[y][x])):
                 #print(str(board[y][x]) + " " + str(solution[y][x]))
-                print("solution not correct")
-                return False
-    return True
+                errors += 1
+    if (errors != 0):
+        return False, errors
+    else:
+        return True, errors
 
 def sudokuWindow(board, solution):
     pg.init()
@@ -199,14 +208,14 @@ def sudokuWindow(board, solution):
                 #print(str(x) + " " + str(y))
                 #drawSelectBox(screen, x, y)
             if (event.type == pg.KEYDOWN):
+                if (event.key == pg.K_TAB):
+                    if (bigNumbers):
+                        bigNumbers = False
+                    else:
+                        bigNumbers = True
                 if (x != 66 and y != 66):
                     if (event.key == pg.K_BACKSPACE):
-                        removeNumber(board, ownInput, x, y)
-                    elif (event.key == pg.K_TAB):
-                        if (bigNumbers):
-                            bigNumbers = False
-                        else:
-                            bigNumbers = True
+                        removeNumber(board, ownInput, smallNumbers, x, y)
                     else:
                         num = getInput(event)
                         if (num != False):
@@ -221,9 +230,11 @@ def sudokuWindow(board, solution):
         drawNumbers(screen, board, ownInput, smallNumbers)
 
         if not findEmpty(board):
-            win = checkIfCorrect(board, solution)
+            win, errors = checkIfCorrect(board, solution)
             if win:
                 run = False
                 endgameWindow(win)
+            else:
+                print("You have " + str(errors) + " errors!")
 
         pg.display.flip()
