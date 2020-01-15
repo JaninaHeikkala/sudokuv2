@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9f4119cb-c645-4e8f-b53f-288d0304a2e9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainApp.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainApp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sudokuWindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/sudokuWindow.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainWindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainWindow.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,7 +134,7 @@
       <updated>1576926035829</updated>
       <workItem from="1576926048122" duration="10310000" />
       <workItem from="1577033271081" duration="75000" />
-      <workItem from="1577033449268" duration="21833000" />
+      <workItem from="1577033449268" duration="22912000" />
     </task>
     <servers />
   </component>
@@ -143,22 +142,22 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1628" height="241" key="GridCell.Tab.0.bottom" timestamp="1577224815631">
+    <state width="1628" height="241" key="GridCell.Tab.0.bottom" timestamp="1578869147358">
       <screen x="0" y="23" width="1680" height="951" />
     </state>
-    <state width="1628" height="241" key="GridCell.Tab.0.bottom/0.23.1680.951@0.23.1680.951" timestamp="1577224815631" />
-    <state width="1628" height="241" key="GridCell.Tab.0.center" timestamp="1577224815630">
+    <state width="1628" height="241" key="GridCell.Tab.0.bottom/0.23.1680.951@0.23.1680.951" timestamp="1578869147358" />
+    <state width="1628" height="241" key="GridCell.Tab.0.center" timestamp="1578869147353">
       <screen x="0" y="23" width="1680" height="951" />
     </state>
-    <state width="1628" height="241" key="GridCell.Tab.0.center/0.23.1680.951@0.23.1680.951" timestamp="1577224815630" />
-    <state width="1628" height="241" key="GridCell.Tab.0.left" timestamp="1577224815629">
+    <state width="1628" height="241" key="GridCell.Tab.0.center/0.23.1680.951@0.23.1680.951" timestamp="1578869147353" />
+    <state width="1628" height="241" key="GridCell.Tab.0.left" timestamp="1578869147350">
       <screen x="0" y="23" width="1680" height="951" />
     </state>
-    <state width="1628" height="241" key="GridCell.Tab.0.left/0.23.1680.951@0.23.1680.951" timestamp="1577224815629" />
-    <state width="1628" height="241" key="GridCell.Tab.0.right" timestamp="1577224815630">
+    <state width="1628" height="241" key="GridCell.Tab.0.left/0.23.1680.951@0.23.1680.951" timestamp="1578869147350" />
+    <state width="1628" height="241" key="GridCell.Tab.0.right" timestamp="1578869147357">
       <screen x="0" y="23" width="1680" height="951" />
     </state>
-    <state width="1628" height="241" key="GridCell.Tab.0.right/0.23.1680.951@0.23.1680.951" timestamp="1577224815630" />
+    <state width="1628" height="241" key="GridCell.Tab.0.right/0.23.1680.951@0.23.1680.951" timestamp="1578869147357" />
     <state width="1630" height="302" key="GridCell.Tab.1.bottom" timestamp="1577033266848">
       <screen x="0" y="23" width="1680" height="951" />
     </state>
@@ -179,10 +178,14 @@
       <screen x="0" y="23" width="1680" height="951" />
     </state>
     <state x="481" y="77" key="SettingsEditor/0.23.1680.951@0.23.1680.951" timestamp="1576926276055" />
+    <state x="471" y="292" key="com.intellij.ide.util.TipDialog" timestamp="1579084715465">
+      <screen x="0" y="23" width="1680" height="951" />
+    </state>
+    <state x="471" y="292" key="com.intellij.ide.util.TipDialog/0.23.1680.951@0.23.1680.951" timestamp="1579084715465" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/sudoku$MainWindow.coverage" NAME="MainWindow Coverage Results" MODIFIED="1577034210963" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/sudoku$sudokuGenerator.coverage" NAME="sudokuGenerator Coverage Results" MODIFIED="1577032208375" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/sudoku$mainApp.coverage" NAME="mainApp Coverage Results" MODIFIED="1577224815623" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/sudoku$mainApp.coverage" NAME="mainApp Coverage Results" MODIFIED="1579084785597" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

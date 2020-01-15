@@ -22,11 +22,11 @@ def pressedButton(pos):
 
 def checkDifficulty(pressed):
     if (pressed == 1):
-        diff = 5
+        diff = 6
     elif (pressed == 2):
-        diff = 4
+        diff = 5
     elif (pressed == 3):
-        diff = 3
+        diff = 4
     return diff
 
 def mainWindow():
