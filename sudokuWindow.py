@@ -1,8 +1,6 @@
 import pygame as pg
 from sudokuGenerator import checkIfWorks, findEmpty
 from endgameWindow import endgameWindow
-from tkinter import *
-from tkinter import messagebox
 
 white = (255, 255, 255)
 black = (0, 0, 0)
