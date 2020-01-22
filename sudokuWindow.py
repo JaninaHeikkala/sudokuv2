@@ -155,13 +155,14 @@ def removeNumber(board, ownInput, smallNumbers, x, y):
         ownInput[y][x] = 'x'
 
 def drawSmallNumbers(smallNumbers, ownInput, board, num, x, y):
-    if ownInput[y][x] != 'x':
-        ownInput[y][x] = 'x'
-        board[y][x] = 'x'
-    if (smallNumbers[y][x][int(num)-1] != 'x'):
-        smallNumbers[y][x][int(num) - 1] = 'x'
-    else:
-        smallNumbers[y][x][int(num)-1] = num
+    if (board[y][x] == 'x'):
+        if ownInput[y][x] != 'x':
+            ownInput[y][x] = 'x'
+            board[y][x] = 'x'
+        if (smallNumbers[y][x][int(num)-1] != 'x'):
+            smallNumbers[y][x][int(num) - 1] = 'x'
+        else:
+            smallNumbers[y][x][int(num)-1] = num
 
 def checkIfCorrect(board, solution):
     errors = 0
